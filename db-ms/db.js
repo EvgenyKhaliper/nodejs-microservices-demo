@@ -1,18 +1,38 @@
 const express = require('express')
 const app = express()
 
-users = [{id: 1, name: "james"}];
-blogs = [{id: 1, post: "my first blog", user: 1}];
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true})); 
+
+var users = [];
+var posts = [];
 
 app.route('/users')
     .get(function (req, res) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(users));
+        res.json(users);
+    })
+    .post(function(req, res)
+    {  
+        for (var i = 0, len = users.length; i < len; i++) {
+            if(users[i].name == req.body.user)
+            {
+                res.json({id: users[i].id});
+                return;
+            }
+        }      
+        var userId = users.length + 1;
+        users.push({id: userId, name: req.body.user });
+        res.json({id: userId});
     });
-app.route('/blogs')
+app.route('/posts')
     .get(function (req, res) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(blogs));
+        res.json(posts);
+    })
+    .post(function(req, res)
+    {
+        posts.push({id: posts.length + 1, content: req.body.content, user: req.body.user});
+        res.json({message: 'post was added'});
     });
 
 app.listen(3004)

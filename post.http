@@ -1,0 +1,10 @@
+POST http://localhost:3000/posts HTTP/1.1
+content-type: application/json
+
+{
+    "content": "3 blog",
+    "user": "yo"
+}
+
+###
+GET http://localhost:3000/posts HTTP/1.1
