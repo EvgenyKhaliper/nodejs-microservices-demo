@@ -1,0 +1,19 @@
+ apiVersion: extensions/v1beta1
+ kind: Deployment
+ metadata:
+   name: api-gateway
+   namespace: blog
+ spec:
+   replicas: 1
+   template:
+     metadata:
+       labels:
+         app: api-gateway
+     spec:
+       containers:
+         - name: api-gateway
+           image: node:6-alpine
+           command: ["/bin/sh"]
+           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/api-gateway/api.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/api-gateway/package.json;npm install;node api.js post.blog:3002 user.blog:3001;"]
+           ports:
+             - containerPort: 3000

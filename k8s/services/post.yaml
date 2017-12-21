@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: post
+  namespace: blog
+spec:
+  selector:
+    app: post
+  ports:
+  - port: 3002
+    targetPort: 3002
+  type: ClusterIP

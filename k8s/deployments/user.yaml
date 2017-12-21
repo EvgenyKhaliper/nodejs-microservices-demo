@@ -1,0 +1,19 @@
+ apiVersion: extensions/v1beta1
+ kind: Deployment
+ metadata:
+   name: user
+   namespace: blog
+ spec:
+   replicas: 1
+   template:
+     metadata:
+       labels:
+         app: user
+     spec:
+       containers:
+         - name: user
+           image: node:6-alpine
+           command: ["/bin/sh"]
+           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/user-ms/user.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/user-ms/package.json;npm install;node user.js db.blog:3004;"]
+           ports:
+             - containerPort: 3001
