@@ -1,3 +1,3 @@
- kubectl create -f ~/Work/nodejs-microservices-demo/k8s/blog-namespace.yaml;
- kubectl create -f ~/Work/nodejs-microservices-demo/k8s/deployments/;
- kubectl create -f ~/Work/nodejs-microservices-demo/k8s/services/;
+ kubectl create -f /k8s/blog-namespace.yaml;
+ kubectl create -f /k8s/deployments/;
+ kubectl create -f /k8s/services/;

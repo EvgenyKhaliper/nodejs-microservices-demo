@@ -8,16 +8,3 @@ content-type: application/json
 
 ###
 GET http://localhost:3000/posts HTTP/1.1
-
-
-###
-POST http://35.203.186.190:3000/posts HTTP/1.1
-content-type: application/json
-
-{
-    "content": "3 blog",
-    "user": "yo"
-}
-
-###
-GET http://35.203.186.190:3000/posts HTTP/1.1
