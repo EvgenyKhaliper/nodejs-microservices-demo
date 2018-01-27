@@ -1,19 +1,19 @@
  apiVersion: extensions/v1beta1
  kind: Deployment
  metadata:
-   name: user
-   namespace: blog
+   name: payment-service
+   namespace: shop
  spec:
    replicas: 1
    template:
      metadata:
        labels:
-         app: user
+         app: payment-service
      spec:
        containers:
-         - name: user
+         - name: payment-service
            image: node:6-alpine
            command: ["/bin/sh"]
-           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/user-ms/user.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/user-ms/package.json;npm install;node user.js db.blog:3004;"]
+           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/payment-service/app.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/payment-service/package.json;npm install;node app.js db.shop:3004;"]
            ports:
              - containerPort: 3001

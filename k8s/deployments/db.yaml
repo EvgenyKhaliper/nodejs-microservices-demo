@@ -2,7 +2,7 @@
  kind: Deployment
  metadata:
    name: db
-   namespace: blog
+   namespace: shop
  spec:
    replicas: 1
    template:
@@ -14,6 +14,6 @@
          - name: db
            image: node:6-alpine
            command: ["/bin/sh"]
-           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/db-ms/db.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/db-ms/package.json;npm install;node db.js;"]
+           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/db/app.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/db/package.json;npm install;node app.js;"]
            ports:
              - containerPort: 3004
