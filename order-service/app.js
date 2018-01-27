@@ -6,11 +6,11 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); 
 
-const dbUrl = 'http://' + process.argv[2] + '/posts';
+const dbIp = 'http://' + process.argv[2] + '/orders';
 
-app.route('/posts')
+app.route('/orders')
     .get(function (req, res) {
-        request.get(dbUrl).on('response', function(response) {
+        request.get('http://' + dbIp + '/orders').on('response', function(response) {
             response.on('data', function(posts) {
                 res.json(JSON.parse(posts));
             })
@@ -18,7 +18,7 @@ app.route('/posts')
     })
     .post(function(req, res){
         var post = {
-            uri: dbUrl,
+            uri: 'http://' + dbIp + '/posts',
             method: 'POST',
             json: {"content": req.body.content, "user": req.body.user}
         };

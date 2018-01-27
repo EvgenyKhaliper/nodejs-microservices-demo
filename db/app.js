@@ -5,10 +5,10 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); 
 
-var users = [];
-var posts = [];
+var orders = [];
+var transactions = [];
 
-app.route('/users')
+app.route('/orders')
     .get(function (req, res) {
         res.json(users);
     })
@@ -25,7 +25,7 @@ app.route('/users')
         users.push({id: userId, name: req.body.user });
         res.json({id: userId});
     });
-app.route('/posts')
+app.route('/transactions')
     .get(function (req, res) {
         res.json(posts);
     })
