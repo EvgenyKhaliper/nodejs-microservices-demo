@@ -3,9 +3,10 @@ content-type: application/json
 
 {
     "item": "t-shirt",
-    "price": 100
-    "costomer": "Gregor"
+    "price": 100,
+    "customer": "Gregor"
 }
 
 ###
 GET http://localhost:3000/orders HTTP/1.1
+###

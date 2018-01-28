@@ -1,7 +1,7 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); 
 
@@ -10,29 +10,25 @@ var transactions = [];
 
 app.route('/orders')
     .get(function (req, res) {
-        res.json(users);
+        res.json(orders);
     })
     .post(function(req, res)
-    {  
-        for (var i = 0, len = users.length; i < len; i++) {
-            if(users[i].name == req.body.user)
-            {
-                res.json({id: users[i].id});
-                return;
-            }
-        }      
-        var userId = users.length + 1;
-        users.push({id: userId, name: req.body.user });
-        res.json({id: userId});
+    {      
+        var orderId = orders.length + 1;
+        var order = {id: orderId, item: req.body.item, price: req.body.price, customer: req.body.customer }
+        orders.push(order);
+        res.json({order: order});
     });
 app.route('/transactions')
     .get(function (req, res) {
-        res.json(posts);
+        res.json(transactions);
     })
     .post(function(req, res)
     {
-        posts.push({id: posts.length + 1, content: req.body.content, user: req.body.user});
-        res.json({message: 'post was added'});
+        var transactionId = transactions.length + 1;
+        var transaction = {id: transactionId, orderId: req.body.orderId, success: true};
+        transactions.push(transaction);
+        res.json({transaction: transaction});
     });
 
-app.listen(3004)
+app.listen(3004);

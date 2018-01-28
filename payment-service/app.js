@@ -1,30 +1,30 @@
-const express = require('express')
-const request = require('request')
-const app = express()
+const express = require('express');
+const request = require('request');
+const app = express();
 
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); 
 
-const dbUrl = 'http://' + process.argv[2] + '/users';
+const dbIp = process.argv[2];
 
-app.route('/users')
+app.route('/transactions')
     .get(function (req, res) {
-        request.get(dbUrl).on('response', function(response) {
-            response.on('data', function(users) {
-                res.json(JSON.parse(users));
+        request.get('http://' + dbIp + '/transactions').on('response', function(response) {
+            response.on('data', function(transactions) {
+                res.json(JSON.parse(transactions));
             })
         })
     })    
     .post(function(req, res){
-        var user = {
-            uri: dbUrl,
+        var transaction = {
+            uri: 'http://' + dbIp + '/transactions',
             method: 'POST',
-            json: {"user": req.body.user}
+            json: req.body
         };
-        request.post(user, function(err, httpResponse, body){ 
+        request.post(transaction, function(err, httpResponse, body){ 
             res.json(body);  
         })
     });
 
-app.listen(3001)
+app.listen(3001);
