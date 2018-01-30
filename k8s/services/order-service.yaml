@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: post
+  name: order-service
   namespace: blog
 spec:
   selector:
-    app: post
+    app: order-service
   ports:
   - port: 3002
     targetPort: 3002

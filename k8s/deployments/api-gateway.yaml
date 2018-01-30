@@ -14,6 +14,6 @@
          - name: api-gateway
            image: node:6-alpine
            command: ["/bin/sh"]
-           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/api-gateway/app.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/api-gateway/package.json;npm install;node app.js order-service.blog:3002 tr.blog:3001;"]
+           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/api-gateway/app.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/api-gateway/package.json;npm install;node app.js payment-service.blog:3001 order-service.blog:3002;"]
            ports:
              - containerPort: 3000

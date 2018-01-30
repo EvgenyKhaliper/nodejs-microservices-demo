@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: user
+  name: payment-service
   namespace: blog
 spec:
   selector:
-    app: user
+    app: payment-service
   ports:
   - port: 3001
     targetPort: 3001

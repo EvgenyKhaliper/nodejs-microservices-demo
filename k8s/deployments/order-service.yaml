@@ -14,6 +14,6 @@
          - name: order-service
            image: node:6-alpine
            command: ["/bin/sh"]
-           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/order-service/app.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/order-service/package.json;npm install;node app.js db.shop:3004;"]
+           args: ["-c", "cd /home/node;apk update && apk add ca-certificates && update-ca-certificates && apk add wget;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/order-service/app.js;wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/EvgenyKhaliper/nodejs-microservices-demo/master/order-service/package.json;npm install;node app.js payment-service.shop:3001 db.shop:3004;"]
            ports:
              - containerPort: 3002
